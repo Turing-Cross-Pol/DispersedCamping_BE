@@ -1,1 +1,1 @@
-Tempalte
+Template
