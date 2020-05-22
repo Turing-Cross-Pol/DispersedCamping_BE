@@ -6,5 +6,8 @@ A mobile app that allows users to post dispersed campsites they’ve found.  The
 - Flask
 - Marshmallow 
 
+**Testing:**
+- Pytest
+
 ### Resources
-- [Writing Effective User Stories](https://mod4.turing.io/lessons/user_story_guiding_principles.html)
+
