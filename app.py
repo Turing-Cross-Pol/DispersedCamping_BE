@@ -8,9 +8,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Campsite
-
-
+import models
 
 @app.route('/')
 def hello():
@@ -23,4 +21,3 @@ def hello_name(name):
 
 if __name__ == '__main__':
     app.run()
-
