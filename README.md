@@ -4,7 +4,8 @@ A mobile app that allows users to post dispersed campsites they’ve found.  The
 ## Back-End Technology Used
 - Python
 - Flask
-- Marshmallow 
+- SQLAlchemy
+- Postgresql
 
 **Testing:**
 - Pytest
