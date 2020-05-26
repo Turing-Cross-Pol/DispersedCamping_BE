@@ -21,13 +21,13 @@ class CampsiteTestCase(unittest.TestCase):
 
     def test_campsite_creation(self):
         """Test API can create a campsite (POST request)"""
-        res = self.client().post('/campsites/', data=self.bucketlist)
+        res = self.client().post('/campsites/', data=self.campsite)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Go to Borabora', str(res.data))
 
     def test_api_can_get_all_campsites(self):
         """Test API can get a campsite (GET request)."""
-        res = self.client().post('/campsites/', data=self.bucketlist)
+        res = self.client().post('/campsites/', data=self.campsite)
         self.assertEqual(res.status_code, 201)
         res = self.client().get('/campsites/')
         self.assertEqual(res.status_code, 200)
@@ -35,7 +35,7 @@ class CampsiteTestCase(unittest.TestCase):
 
     def test_api_can_get_campsite_by_id(self):
         """Test API can get a single campsite by using it's id."""
-        rv = self.client().post('/campsites/', data=self.bucketlist)
+        rv = self.client().post('/campsites/', data=self.campsite)
         self.assertEqual(rv.status_code, 201)
         result_in_json = json.loads(rv.data.decode('utf-8').replace("'", "\""))
         result = self.client().get(
