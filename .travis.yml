@@ -5,6 +5,8 @@ cache: pip
 services: postgresql
 install:
   - pip install -r requirements.txt
+before_script:
+	- psql -c "CREATE DATABASE postgresql://localhost/test_db;" -U postgres
 script:
   - . .env
   - python test_campsite.py
