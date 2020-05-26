@@ -5,6 +5,7 @@ A mobile app that allows users to post dispersed campsites they’ve found.  The
 - Python
 - Flask
 - SQLAlchemy
+- Marshmallow
 - Postgresql
 
 **Testing:**
