@@ -2,8 +2,10 @@ language: python
 python:
   - "3.8"
 cache: pip
+services: postgresql
 install:
   - pip install -r requirements.txt
+before_script: psql -c "CREATE DATABASE test_db;" -U postgres
 script:
   - . .env
-  - python -m pytest
+  - python test_campsite.py
