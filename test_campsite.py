@@ -13,7 +13,7 @@ class CampsiteTestCase(unittest.TestCase):
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
         self.campsite = {'name': 'Go to Borabora for vacation'}
-
+        self.comment = {'title': 'amazing', 'description': 'this is a really great place', 'rating': '5'}
         # binds the app to the current context
         with self.app.app_context():
             # create all tables
@@ -73,6 +73,15 @@ class CampsiteTestCase(unittest.TestCase):
         result = self.client().get('/campsites/1')
         self.assertEqual(result.status_code, 404)
 
+    @unittest.skip
+    def test_comment_creation(self):
+        res = self.client().post('/campsites/', data=self.campsite)
+        self.assertEqual(rv.status_code, 201)
+        res = self.client().post('/campsites/1/comments', data=self.comment)
+        self.assertEqual(res.status_code, 201)
+        self.assertIn('amazing', str(res.data))
+
+
     def tearDown(self):
         """teardown all initialized variables."""
         with self.app.app_context():
@@ -84,4 +93,3 @@ class CampsiteTestCase(unittest.TestCase):
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
-
