@@ -1,6 +1,10 @@
 from app import db
 #from sqlalchemy.dialects.postgresql import JSON
 
+amenitites = db.Table('amenitites',
+    db.Column('amenity_id', db.Integer, db.ForeignKey('amenity.id'), primary_key=True),
+    db.Column('campsites_id', db.Integer, db.ForeignKey('campsites.id'), primary_key=True)
+)
 
 class Campsite(db.Model):
     __tablename__ = 'campsites'
@@ -54,3 +58,16 @@ class Comment(db.Model):
 
     def __repr__(self):
     		return "<Comment: {}>".format(self.title)
+
+
+class Amenity(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    firepit = db.Column(db.Boolean())
+    boating = db.Column(db.Boolean())
+    biking = db.Column(db.Boolean())
+    atv = db.Column(db.Boolean())
+    fishing = db.Column(db.Boolean())
+    horse = db.Column(db.Boolean())
+    hiking = db.Column(db.Boolean())
+    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
