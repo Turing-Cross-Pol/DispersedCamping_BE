@@ -40,9 +40,17 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String())
     title = db.Column(db.String())
     description = db.Column(db.String())
     rating = db.Column(db.String())
     campsite_id = db.Column(db.Integer, db.ForeignKey('campsites.id'))
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+
+    @staticmethod
+    def get_all():
+    		return Campsite.comments.query.all()
+
+
+    def __repr__(self):
+    		return "<Comment: {}>".format(self.title)
