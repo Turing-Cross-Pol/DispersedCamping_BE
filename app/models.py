@@ -1,11 +1,5 @@
 from app import db
 from sqlalchemy.orm import relationship, backref
-#from sqlalchemy.dialects.postgresql import JSON
-
-# amenities = db.Table('amenities',
-#     db.Column('amenity_id', db.Integer, db.ForeignKey('amenity.id'), primary_key=True),
-#     db.Column('campsites_id', db.Integer, db.ForeignKey('campsites.id'), primary_key=True)
-# )
 
 class CampsiteAmenity(db.Model):
     __tablename__ = 'campsiteamenities'
