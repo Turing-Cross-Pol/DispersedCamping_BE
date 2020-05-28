@@ -127,6 +127,17 @@ def create_app(config_name):
 				response.status_code = 200
 			return response
 
+#	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
+#  def comments(id, **kwargs):
+#		campsite = Campsite.query.filter_by(id=id).first()
+#    if not campsite:
+#      abort(404)
+
+#		if request.method == 'POST':
+#			title = str(request.data.get('title', ''))
+					
+		
+
 	return app
 
 	
