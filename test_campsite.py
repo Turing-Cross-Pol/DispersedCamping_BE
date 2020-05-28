@@ -2,7 +2,9 @@
 import unittest
 import os
 import json
+from flask import jsonify
 from app import create_app, db
+import pdb
 
 
 class CampsiteTestCase(unittest.TestCase):
@@ -12,7 +14,7 @@ class CampsiteTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
-        self.campsite = {'name': 'Go to Borabora for vacation'}
+        self.campsite = {'name': 'Go to Borabora for vacation', 'description': 'test', 'city': 'test', 'image_url': 'test', 'state': 'test', 'driving_tips': 'test', 'lon': 123, 'lat': 456}
         self.comment = {'title': 'amazing', 'description': 'this is a really great place', 'rating': '5'}
         # binds the app to the current context
         with self.app.app_context():
@@ -33,7 +35,6 @@ class CampsiteTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertIn('Go to Borabora', str(res.data))
 
-    @unittest.skip
     def test_api_can_get_campsite_by_id(self):
         """Test API can get a single campsite by using it's id."""
         rv = self.client().post('/campsites/', data=self.campsite)
@@ -44,12 +45,11 @@ class CampsiteTestCase(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertIn('Go to Borabora', str(result.data))
 
-    @unittest.skip
     def test_campsite_can_be_edited(self):
         """Test API can edit an existing campsite. (PUT request)"""
         rv = self.client().post(
             '/campsites/',
-            data={'name': 'Eat, pray and love'})
+            data=self.campsite)
         self.assertEqual(rv.status_code, 201)
         rv = self.client().put(
             '/campsites/1',
@@ -60,12 +60,11 @@ class CampsiteTestCase(unittest.TestCase):
         results = self.client().get('/campsites/1')
         self.assertIn('Dont just eat', str(results.data))
 
-    @unittest.skip
     def test_campsite_deletion(self):
         """Test API can delete an existing campsite. (DELETE request)."""
         rv = self.client().post(
             '/campsites/',
-            data={'name': 'Eat, pray and love'})
+            data=self.campsite)
         self.assertEqual(rv.status_code, 201)
         res = self.client().delete('/campsites/1')
         self.assertEqual(res.status_code, 200)
