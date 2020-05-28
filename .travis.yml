@@ -8,4 +8,4 @@ install:
 before_script: psql -c "CREATE DATABASE test_db;" -U postgres
 script:
   - . .env
-  - python test_campsite.py
+  - python -m unittest
