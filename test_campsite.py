@@ -72,14 +72,22 @@ class CampsiteTestCase(unittest.TestCase):
         result = self.client().get('/campsites/1')
         self.assertEqual(result.status_code, 404)
 
-    @unittest.skip
     def test_comment_creation(self):
-        res = self.client().post('/campsites/', data=self.campsite)
+        rv = self.client().post('/campsites/', data=self.campsite)
         self.assertEqual(rv.status_code, 201)
         res = self.client().post('/campsites/1/comments', data=self.comment)
         self.assertEqual(res.status_code, 201)
         self.assertIn('amazing', str(res.data))
 
+    def test_comment_read(self):
+        rv = self.client().post('/campsites/', data=self.campsite)
+        res = self.client().post('/campsites/1/comments', data=self.comment)
+        rev = self.client().get('/campsites/1/comments')
+        self.assertIn('amazing', str(res.data))
+        self.client().post('/campsites/1/comments', data={'title': 'test'})
+        ras = self.client().get('/campsites/1/comments')
+        self.assertIn('test', str(ras.data))
+        self.assertIn('amazing', str(ras.data))
 
     def tearDown(self):
         """teardown all initialized variables."""

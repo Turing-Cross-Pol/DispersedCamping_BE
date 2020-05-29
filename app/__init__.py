@@ -14,6 +14,7 @@ db = SQLAlchemy()
 
 def create_app(config_name):
 	from app.models import Campsite
+	from app.models import Comment
 	app = FlaskAPI(__name__, instance_relative_config=True)
 	app.config.from_object(app_config[config_name])
 	app.config.from_pyfile('config.py')
@@ -105,7 +106,7 @@ def create_app(config_name):
                 'lat': campsite.lat
 								})
 				response.status_code = 201
-			return response
+				return response
 		else:
 			# GET
 			campsites = Campsite.get_all()
@@ -125,18 +126,44 @@ def create_app(config_name):
 				results.append(obj)
 				response = jsonify(results)
 				response.status_code = 200
+				return response
+
+	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
+	def comments(id, **kwargs):
+		campsite = Campsite.query.filter_by(id=id).first()
+		if not campsite:
+			abort(404)
+
+		if request.method == 'POST':
+			title = str(request.data.get('title', ''))
+			description = str(request.data.get('description', ''))
+			rating = str(request.data.get('rating', ''))
+			comment = Comment(title=title, description=description, rating=rating, campsite_id=campsite.id)
+			campsite.comments.append(comment)
+			campsite.save()
+			comment.save()				
+			response = jsonify({
+				'title': comment.title,
+				'description': comment.description,
+				'rating': comment.rating
+			})
+			response.status_code = 201
 			return response
 
-#	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
-#  def comments(id, **kwargs):
-#		campsite = Campsite.query.filter_by(id=id).first()
-#    if not campsite:
-#      abort(404)
-
-#		if request.method == 'POST':
-#			title = str(request.data.get('title', ''))
-					
-		
+		else:
+			comments = campsite.comments
+			results = []	
+			for comment in comments:
+				obj = {
+					'title': comment.title,
+					'description': comment.description,
+					'rating': comment.description
+				}
+				results.append(obj)
+			response = jsonify(results)
+			response.status_code = 200
+			return response
+				
 
 	return app
 
