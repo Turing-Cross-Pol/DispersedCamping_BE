@@ -66,6 +66,10 @@ class Comment(db.Model):
     def get_all():
     		return Campsite.comments.query.all()
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 
     def __repr__(self):
     		return "<Comment: {}>".format(self.title)
