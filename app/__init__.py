@@ -58,6 +58,7 @@ def create_app(config_name):
             'name': campsite.name,
             'city': campsite.city,
             'state': campsite.state,
+						'image_url': campsite.image_url,
             'description': campsite.description,
             'driving_tips': campsite.driving_tips,
             'lon': campsite.lon,
@@ -70,6 +71,7 @@ def create_app(config_name):
 				response = jsonify({
 						'id': campsite.id,
             'name': campsite.name,
+						'image_url': campsite.image_url,
             'city': campsite.city,
             'state': campsite.state,
             'description': campsite.description,
@@ -123,6 +125,7 @@ def create_app(config_name):
 						'name': campsite.name,
 						'city': campsite.city,
 						'state': campsite.state,
+						'image_url': campsite.image_url,
 						'description': campsite.description,
 						'driving_tips': campsite.driving_tips,
 						'lon': campsite.lon,
