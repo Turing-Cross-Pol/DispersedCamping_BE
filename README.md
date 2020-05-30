@@ -7,6 +7,8 @@ A mobile app that allows users to post dispersed campsites they’ve found.  The
 - SQLAlchemy
 - Marshmallow
 - Postgresql
+- Gunicorn
+- Heroku
 
 **Testing:**
 - Unittest
