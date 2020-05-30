@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy.orm import relationship, backref
+import pdb
 
 class CampsiteAmenity(db.Model):
     __tablename__ = 'campsiteamenities'
@@ -23,7 +24,7 @@ class Campsite(db.Model):
     lon = db.Column(db.Float())
     lat = db.Column(db.Float())
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    comments = db.relationship('Comment', backref='campsite', lazy=True)
+    comments = db.relationship('Comment', cascade='all,delete', backref='campsite', lazy=True)
     amenities = db.relationship('Amenity', secondary='campsiteamenities')
 
     def save(self):
@@ -35,6 +36,20 @@ class Campsite(db.Model):
     def get_all():
     		return Campsite.query.all()
 
+    def set_amenities(self, amenities):
+        self.amenities = []
+        for amenity in amenities:
+            hold = Amenity.find_name(amenity)
+            self.amenities.append(hold)
+        if self.amenities == [None]:
+            self.amenities = []
+        return self.amenities
+
+    def list_amenities(self):	
+        collect = []
+        for amenity in self.amenities:
+            collect.append(amenity.name)
+        return collect
 
     def delete(self):
     		db.session.delete(self)
@@ -80,12 +95,17 @@ class Amenity(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    firepit = db.Column(db.Boolean())
-    boating = db.Column(db.Boolean())
-    biking = db.Column(db.Boolean())
-    atv = db.Column(db.Boolean())
-    fishing = db.Column(db.Boolean())
-    horse = db.Column(db.Boolean())
-    hiking = db.Column(db.Boolean())
+    name = db.Column(db.String())
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     campsites = db.relationship('Campsite', secondary='campsiteamenities')
+
+    def save(self):
+      db.session.add(self)
+      db.session.commit()
+
+    @staticmethod
+    def find_name(name):
+        return Amenity.query.filter_by(name=name).first()
+
+    def __repr__(self):
+        return "<Amenity: {}>".format(self.name)
