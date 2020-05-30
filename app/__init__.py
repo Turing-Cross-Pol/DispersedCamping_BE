@@ -176,6 +176,7 @@ def create_app(config_name):
 	def destroy_comment(camp_id, comment_id, **kwargs):
 		campsite = Campsite.query.filter_by(id=camp_id).first()
 		comment = Comment.query.filter_by(id=comment_id).first()
+
 		if not campsite or not comment:
 			abort(404)
 		comment.delete()
