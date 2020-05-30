@@ -13,8 +13,7 @@ db = SQLAlchemy()
 
 
 def create_app(config_name):
-	from app.models import Campsite
-	from app.models import Comment
+	from app.models import Campsite, Comment
 	app = FlaskAPI(__name__, instance_relative_config=True)
 	app.config.from_object(app_config[config_name])
 	app.config.from_pyfile('config.py')
@@ -40,8 +39,9 @@ def create_app(config_name):
 			state = str(request.data.get('state', campsite.state))
 			description = str(request.data.get('description', campsite.description))
 			driving_tips = str(request.data.get('driving_tips', campsite.driving_tips))
-			lon = int(request.data.get('lon', campsite.lon))
-			lat = int(request.data.get('lat', campsite.lat))
+			lon = float(request.data.get('lon', campsite.lon))
+			lat = float(request.data.get('lat', campsite.lat))
+			amenities = str(request.data.get('amenities', '')).split(', ')
 			campsite.name = name
 			campsite.image_url = image_url
 			campsite.city = city
@@ -50,6 +50,7 @@ def create_app(config_name):
 			campsite.driving_tips = driving_tips
 			campsite.lon = lon
 			campsite.lat = lat
+			campsite.set_amenities(amenities)
 			campsite.save()
 			response = jsonify({
             'id': campsite.id,
@@ -73,7 +74,8 @@ def create_app(config_name):
             'description': campsite.description,
             'driving_tips': campsite.driving_tips,
             'lon': campsite.lon,
-            'lat': campsite.lat
+            'lat': campsite.lat,
+						'amenities': str(campsite.list_amenities())
       	})
 				response.status_code = 200
 				return response
@@ -81,7 +83,7 @@ def create_app(config_name):
 
 	@app.route('/campsites/', methods=['POST', 'GET'])
 	def campsites():
-
+		from app.models import Amenity
 		if request.method == "POST":
 			name = str(request.data.get('name', ''))
 			image_url = str(request.data.get('image_url', ''))
@@ -89,24 +91,26 @@ def create_app(config_name):
 			state = str(request.data.get('state', ''))
 			description = str(request.data.get('description', ''))
 			driving_tips = str(request.data.get('driving_tips', ''))
-			lon = int(request.data.get('lon', ''))
-			lat = int(request.data.get('lat', ''))
-			if (name and image_url and city and state and description and driving_tips and lon and lat):
-				campsite = Campsite(name=name, image_url=image_url, city=city, state=state, description=description, driving_tips=driving_tips, lon=lon, lat=lat)
-				campsite.save()
-				response = jsonify({
-								'id': campsite.id,
-								'name': campsite.name,
-                'image_url': campsite.image_url,
-                'city': campsite.city,
-                'state': campsite.state,
-                'description': campsite.description,
-                'driving_tips': campsite.driving_tips,
-                'lon': campsite.lon,
-                'lat': campsite.lat
-								})
-				response.status_code = 201
-				return response
+			lon = float(request.data.get('lon', 0))
+			lat = float(request.data.get('lat', 0))
+			amenities = str(request.data.get('amenities', '')).split(', ')
+			campsite = Campsite(name=name, image_url=image_url, city=city, state=state, description=description, driving_tips=driving_tips, lon=lon, lat=lat)
+			campsite.set_amenities(amenities)
+			campsite.save()
+			response = jsonify({
+						'id': campsite.id,
+						'name': campsite.name,
+            'image_url': campsite.image_url,
+            'city': campsite.city,
+            'state': campsite.state,
+            'description': campsite.description,
+            'driving_tips': campsite.driving_tips,
+            'lon': campsite.lon,
+            'lat': campsite.lat,
+						'amenities': str(campsite.list_amenities())
+						})
+			response.status_code = 201
+			return response
 		else:
 			# GET
 			campsites = Campsite.get_all()
@@ -121,12 +125,13 @@ def create_app(config_name):
 						'description': campsite.description,
 						'driving_tips': campsite.driving_tips,
 						'lon': campsite.lon,
-						'lat': campsite.lat
+						'lat': campsite.lat,
+						'amenities': str(campsite.list_amenities())
 						}
 				results.append(obj)
-				response = jsonify(results)
-				response.status_code = 200
-				return response
+			response = jsonify(results)
+			response.status_code = 200
+			return response
 
 	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
 	def comments(id, **kwargs):
@@ -137,7 +142,7 @@ def create_app(config_name):
 		if request.method == 'POST':
 			title = str(request.data.get('title', ''))
 			description = str(request.data.get('description', ''))
-			rating = str(request.data.get('rating', ''))
+			rating = int(request.data.get('rating', 0))
 			comment = Comment(title=title, description=description, rating=rating, campsite_id=campsite.id)
 			campsite.comments.append(comment)
 			campsite.save()

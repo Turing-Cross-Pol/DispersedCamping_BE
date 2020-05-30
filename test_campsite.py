@@ -4,6 +4,7 @@ import os
 import json
 from flask import jsonify
 from app import create_app, db
+from app.models import Campsite, Amenity, Comment
 import pdb
 
 
@@ -14,18 +15,30 @@ class CampsiteTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
-        self.campsite = {'name': 'Go to Borabora for vacation', 'description': 'test', 'city': 'test', 'image_url': 'test', 'state': 'test', 'driving_tips': 'test', 'lon': 123, 'lat': 456}
+        self.campsite = {'name': 'Go to Borabora for vacation', 'description': 'test', 'city': 'test', 'image_url': 'test', 'state': 'test', 'driving_tips': 'test', 'lon': 123, 'lat': 456, 'amenities': 'fire, horse, boat'}
         self.comment = {'title': 'amazing', 'description': 'this is a really great place', 'rating': '5'}
+        fire = Amenity(name='fire')
+        horse = Amenity(name='horse')
+        boat = Amenity(name='boat')
         # binds the app to the current context
         with self.app.app_context():
             # create all tables
             db.create_all()
+            fire.save()
+            horse.save()
+            boat.save()	
 
     def test_campsite_creation(self):
         """Test API can create a campsite (POST request)"""
         res = self.client().post('/campsites/', data=self.campsite)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Go to Borabora', str(res.data))
+
+    def test_campsite_amenity(self):
+        res = self.client().post('/campsites/', data=self.campsite)
+        self.assertEqual(res.status_code, 201)
+        self.assertIn('fire', str(res.data))
+        self.assertIn('horse', str(res.data))
 
     def test_api_can_get_all_campsites(self):
         """Test API can get a campsite (GET request)."""
@@ -37,11 +50,10 @@ class CampsiteTestCase(unittest.TestCase):
 
     def test_api_can_get_campsite_by_id(self):
         """Test API can get a single campsite by using it's id."""
-        rv = self.client().post('/campsites/', data=self.campsite)
-        self.assertEqual(rv.status_code, 201)
-        result_in_json = json.loads(rv.data.decode('utf-8').replace("'", "\""))
+        res = self.client().post('/campsites/', data=self.campsite)
+        self.assertEqual(res.status_code, 201)
         result = self.client().get(
-            '/campsites/{}'.format(result_in_json['id']))
+            '/campsites/1')
         self.assertEqual(result.status_code, 200)
         self.assertIn('Go to Borabora', str(result.data))
 
