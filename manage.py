@@ -13,13 +13,13 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def seed():
-    fire = Amenity(name='fire)')
-    horse = Amenity(name='horse)')
-    boat = Amenity(name='boat)')
-    fish = Amenity(name='fish)')
-    hike = Amenity(name='hike)')
-    bike = Amenity(name='bike)')
-    atv = Amenity(name='atv)')
+    fire = Amenity(name='fire')
+    horse = Amenity(name='horse')
+    boat = Amenity(name='boat')
+    fish = Amenity(name='fish')
+    hike = Amenity(name='hike')
+    bike = Amenity(name='bike')
+    atv = Amenity(name='atv')
 
     campsite1 = Campsite(
         name = '18 Rd-North Fruita Desert',
