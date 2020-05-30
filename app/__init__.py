@@ -20,6 +20,12 @@ def create_app(config_name):
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 	db.init_app(app)
 
+
+	@app_route('/', methods='GET')
+		def home_page():
+			return 'Campings is the Best'
+
+
 	@app.route('/campsites/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 	def campsite_manipulation(id, **kwargs):
 		campsite = Campsite.query.filter_by(id=id).first()
@@ -61,7 +67,7 @@ def create_app(config_name):
             'driving_tips': campsite.driving_tips,
             'lon': campsite.lon,
             'lat': campsite.lat
-      })	
+      })
 			response.status_code = 200
 			return response
 		else:
@@ -146,7 +152,7 @@ def create_app(config_name):
 			comment = Comment(title=title, description=description, rating=rating, campsite_id=campsite.id)
 			campsite.comments.append(comment)
 			campsite.save()
-			comment.save()				
+			comment.save()
 			response = jsonify({
 				'id': comment.id,
 				'title': comment.title,
@@ -158,7 +164,7 @@ def create_app(config_name):
 
 		else:
 			comments = campsite.comments
-			results = []	
+			results = []
 			for comment in comments:
 				obj = {
 					'id': comment.id,
@@ -174,7 +180,7 @@ def create_app(config_name):
 	@app.route('/campsites/<int:camp_id>/comments/<int:comment_id>', methods=['DELETE'])
 	def destroy_comment(camp_id, comment_id, **kwargs):
 		campsite = Campsite.query.filter_by(id=camp_id).first()
-		comment = Comment.query.filter_by(id=comment_id).first() 
+		comment = Comment.query.filter_by(id=comment_id).first()
 		if not campsite or not comment:
 			abort(404)
 		comment.delete()
