@@ -52,11 +52,11 @@ class Campsite(db.Model):
         return collect
 
     def average_rating(self, comments):
-        collect = []
+        all_comments = []
         comments = self.comments
         for comment in comments:
-            collect.append(int(comment.rating))
-            total = sum(collect) / len(collect)
+            all_comments.append(int(comment.rating))
+            total = sum(all_comments) / len(all_comments)
         return total
 
     def delete(self):
