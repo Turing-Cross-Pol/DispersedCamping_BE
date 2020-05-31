@@ -162,6 +162,7 @@ def create_app(config_name):
 
 		else:
 			comments = campsite.comments
+			avg_rating = { 'average_rating': campsite.average_rating(comments) }
 			results = []
 			for comment in comments:
 				obj = {
@@ -171,7 +172,7 @@ def create_app(config_name):
 					'rating': comment.rating
 				}
 				results.append(obj)
-			response = jsonify(results)
+			response = jsonify(results, avg_rating)
 			response.status_code = 200
 			return response
 
