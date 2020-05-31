@@ -107,7 +107,7 @@ class CampsiteTestCase(unittest.TestCase):
         res = self.client().delete('/campsites/1/comments/1')
         self.assertEqual(res.status_code, 200)
         result = self.client().get('/campsites/1/comments')
-        self.assertEqual(result.data, b'[]\n')
+        self.assertEqual(result.data, b'[\n  [], \n  {\n    "average_rating": 0\n  }\n]\n')
 
     def tearDown(self):
         """teardown all initialized variables."""

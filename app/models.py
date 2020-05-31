@@ -54,6 +54,9 @@ class Campsite(db.Model):
     def average_rating(self, comments):
         all_comments = []
         comments = self.comments
+        if not comments:
+            total = 0
+        
         for comment in comments:
             all_comments.append(int(comment.rating))
             total = sum(all_comments) / len(all_comments)
