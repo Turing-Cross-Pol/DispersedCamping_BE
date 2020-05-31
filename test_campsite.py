@@ -26,7 +26,7 @@ class CampsiteTestCase(unittest.TestCase):
             db.create_all()
             fire.save()
             horse.save()
-            boat.save()	
+            boat.save()
 
     def test_campsite_creation(self):
         """Test API can create a campsite (POST request)"""
@@ -100,7 +100,7 @@ class CampsiteTestCase(unittest.TestCase):
         ras = self.client().get('/campsites/1/comments')
         self.assertIn('test', str(ras.data))
         self.assertIn('amazing', str(ras.data))
-		
+
     def test_comment_deletion(self):
         self.client().post('/campsites/', data=self.campsite)
         self.client().post('/campsites/1/comments', data=self.comment)
@@ -108,7 +108,14 @@ class CampsiteTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         result = self.client().get('/campsites/1/comments')
         self.assertEqual(result.data, b'[]\n')
-				
+
+    def test_average_comment(self):
+        self.client().post('/campsites/', data=self.campsite)
+        self.client().post('/campsites/1/comments', data=self.comment)
+        rev = self.client().get('/campsites/1/comments')
+        # import pdb; pdb.set_trace()
+        self.assertEqual(result.data, b'[]\n')
+
 
     def tearDown(self):
         """teardown all initialized variables."""
