@@ -109,14 +109,6 @@ class CampsiteTestCase(unittest.TestCase):
         result = self.client().get('/campsites/1/comments')
         self.assertEqual(result.data, b'[]\n')
 
-    def test_average_comment(self):
-        self.client().post('/campsites/', data=self.campsite)
-        self.client().post('/campsites/1/comments', data=self.comment)
-        rev = self.client().get('/campsites/1/comments')
-        # import pdb; pdb.set_trace()
-        self.assertEqual(result.data, b'[]\n')
-
-
     def tearDown(self):
         """teardown all initialized variables."""
         with self.app.app_context():
