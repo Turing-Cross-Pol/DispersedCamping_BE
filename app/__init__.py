@@ -19,7 +19,7 @@ def create_app(config_name):
 	app.config.from_pyfile('config.py')
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 	db.init_app(app)
-	
+
 
 	@app.route('/campsites/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 	def campsite_manipulation(id, **kwargs):
@@ -162,16 +162,17 @@ def create_app(config_name):
 
 		else:
 			comments = campsite.comments
+			avg_rating = { 'average_rating': campsite.average_rating(comments) }
 			results = []
 			for comment in comments:
 				obj = {
 					'id': comment.id,
 					'title': comment.title,
 					'description': comment.description,
-					'rating': comment.description
+					'rating': comment.rating
 				}
 				results.append(obj)
-			response = jsonify(results)
+			response = jsonify(results, avg_rating)
 			response.status_code = 200
 			return response
 

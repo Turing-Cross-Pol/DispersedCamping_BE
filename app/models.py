@@ -1,6 +1,6 @@
 from app import db
 from sqlalchemy.orm import relationship, backref
-import pdb
+
 
 class CampsiteAmenity(db.Model):
     __tablename__ = 'campsiteamenities'
@@ -45,11 +45,22 @@ class Campsite(db.Model):
             self.amenities = []
         return self.amenities
 
-    def list_amenities(self):	
+    def list_amenities(self):
         collect = []
         for amenity in self.amenities:
             collect.append(amenity.name)
         return collect
+
+    def average_rating(self, comments):
+        all_comments = []
+        comments = self.comments
+        if not comments:
+            total = 0
+        
+        for comment in comments:
+            all_comments.append(int(comment.rating))
+            total = sum(all_comments) / len(all_comments)
+        return total
 
     def delete(self):
     		db.session.delete(self)
@@ -84,7 +95,6 @@ class Comment(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
 
     def __repr__(self):
     		return "<Comment: {}>".format(self.title)
