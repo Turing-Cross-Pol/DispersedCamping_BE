@@ -113,6 +113,68 @@ def seed():
     campsite6.amenities.append(hike)
     campsite6.amenities.append(bike)
 
+    campsite7 = Campsite(
+        name = 'Kokopellis Trail',
+        description = 'Dispersed campsites are all along Fall River Rd. We saw at least 4 other vehicles camping 20 to 100 feet off the road. There are also a dozen or so areas to pull off on the shoulder as well. Expect mostly level dirt paths or shoulder areas and look for stone fire rings marking the dispersed sites. There are no amenities (no restrooms, water, etc.). We stayed several days and were not bothered. See http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb5165771.pdf for exact site details.',
+        city = 'Idaho Springs',
+        image_url = 'https://freecampsites.net/wp-content/uploads/2019/06/Idaho-Falls-2-800x600.jpg',
+        state = 'CO',
+        driving_tips = '',
+        lon = -105.626933,
+        lat = 39.799558
+        )
+
+    campsite7.amenities.append(fire)
+    campsite7.amenities.append(hike)
+    comment5 = Comment(title = 'Great Camping', description = 'The dispersed camping has eveything you need.', rating = "5")
+    comment6 = Comment(title = 'Good area. Crowded', description = 'Can get crowded on the weekend.', rating = "4")
+    campsite7.comments.append(comment5)
+    campsite7.comments.append(comment6)
+
+    campsite8 = Campsite(
+        name = 'Yankee Hill',
+        description = 'Yankee Hill Road is a 15.4 mile moderately trafficked out and back trail located near Idaho Springs, Colorado that offers scenic views. The trail is rated as moderate and primarily used for off road driving. Plenty of space to camp along the trail, but expect traffic.',
+        city = 'Idaho Springs',
+        image_url = 'https://cdn-assets.alltrails.com/uploads/photo/image/23238685/extra_large_e73baa1184333f1f9d654b80cd347374.jpg',
+        state = 'CO',
+        driving_tips = 'The dirt road that leads to the campsite is rated as moderate and primarily used for off road driving. 4-wheel drive is probably needed.',
+        lon = -105.56873,
+        lat = 39.80458,
+        )
+
+    campsite8.amenities.append(fire)
+    campsite8.amenities.append(hike)
+    comment7 = Comment(title = 'Loved it', description = 'I mean. Do not come. I want this place to myself.', rating = "4")
+    campsite8.comments.append(comment7)
+
+    campsite9 = Campsite(
+        name = 'Camping on Mill Creek Rd',
+        description = 'I have not been here but I have been to other dispersed campsites nearby on Fall River Rd. There are numerous dispersed campsites (primitive) listed here by the Forest Service: https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb5165771.pdf',
+        city = 'Idaho Springs',
+        image_url = 'https://media-cdn.tripadvisor.com/media/photo-s/10/58/b4/fd/photo2jpg.jpg',
+        state = 'CO',
+        driving_tips = '',
+        lon = -105.6235,
+        lat = 39.78307
+        )
+
+    campsite9.amenities.append(fire)
+    campsite9.amenities.append(atv)
+
+    campsite10 = Campsite(
+        name = 'Bald Mountain Ln West of Central City, CO',
+        description = 'I have not been here, but the Forest Service dispersed camping along the road West of this point. The road quality leading up to these sites appears good, but be aware that dispersed sites are primitive with no restrooms or facilities apart from a firepit. https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb5165771.pdf',
+        city = '',
+        image_url = 'https://media-cdn.tripadvisor.com/media/photo-s/10/58/b4/fd/photo2jpg.jpg',
+        state = 'CO',
+        driving_tips = 'https://listsofjohn.com/img/8/7158.jpg',
+        lon = -105.545953,
+        lat = 39.795211
+        )
+
+    campsite10.amenities.append(fire)
+    campsite10.amenities.append(hike)
+
     db.session.add(fire)
     db.session.add(horse)
     db.session.add(boat)
@@ -125,10 +187,17 @@ def seed():
     db.session.add(campsite4)
     db.session.add(campsite5)
     db.session.add(campsite6)
+    db.session.add(campsite7)
+    db.session.add(campsite8)
+    db.session.add(campsite9)
+    db.session.add(campsite10)
     db.session.add(comment1)
     db.session.add(comment2)
     db.session.add(comment3)
     db.session.add(comment4)
+    db.session.add(comment5)
+    db.session.add(comment6)
+    db.session.add(comment7)
     db.session.commit()
 
 if __name__ == '__main__':
