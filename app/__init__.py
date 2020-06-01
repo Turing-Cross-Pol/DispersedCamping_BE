@@ -78,6 +78,7 @@ def create_app(config_name):
             'driving_tips': campsite.driving_tips,
             'lon': campsite.lon,
             'lat': campsite.lat,
+						'timestamp': campsite.date_created,
 						'amenities': str(campsite.list_amenities())
       	})
 				response.status_code = 200
@@ -130,6 +131,7 @@ def create_app(config_name):
 						'driving_tips': campsite.driving_tips,
 						'lon': campsite.lon,
 						'lat': campsite.lat,
+						'timestamp': campsite.date_created,
 						'amenities': str(campsite.list_amenities())
 						}
 				results.append(obj)
