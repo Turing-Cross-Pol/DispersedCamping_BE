@@ -1,9 +1,7 @@
 # app/__init__.py
-
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, abort
-import pdb
 
 # local import
 from instance.config import app_config

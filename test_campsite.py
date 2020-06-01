@@ -5,7 +5,6 @@ import json
 from flask import jsonify
 from app import create_app, db
 from app.models import Campsite, Amenity, Comment
-import pdb
 
 
 class CampsiteTestCase(unittest.TestCase):
