@@ -119,7 +119,6 @@ def create_app(config_name):
 			results = []
 
 			for campsite in campsites:
-				avg_rating = { 'average_rating': campsite.average_rating() }
 				obj = {
 						'id': campsite.id,
 						'name': campsite.name,
@@ -131,10 +130,10 @@ def create_app(config_name):
 						'lon': campsite.lon,
 						'lat': campsite.lat,
 						'timestamp': campsite.date_created,
-						'amenities': str(campsite.list_amenities())
+						'amenities': str(campsite.list_amenities()),
+						'average_rating': campsite.average_rating()
 						}
 				results.append(obj)
-				results.append(avg_rating)
 			response = jsonify(results)
 			response.status_code = 200
 		return response
