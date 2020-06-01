@@ -72,7 +72,7 @@ class ModelTestCase(unittest.TestCase):
         comment2 = Comment(title = 'Scorpians!', description = 'I did not know scorpians swarmed. At our camp they do...', rating = "3")
         campsite1.comments.append(comment1)
         campsite1.comments.append(comment2)
-        self.assertEqual(campsite1.average_rating(campsite1.comments), 4)
+        self.assertEqual(campsite1.average_rating(), 4)
 
     def test_list_amenities(self):
         campsite1 = Campsite(
