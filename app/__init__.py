@@ -119,6 +119,7 @@ def create_app(config_name):
 			results = []
 
 			for campsite in campsites:
+				avg_rating = { 'average_rating': campsite.average_rating() }
 				obj = {
 						'id': campsite.id,
 						'name': campsite.name,
@@ -133,9 +134,10 @@ def create_app(config_name):
 						'amenities': str(campsite.list_amenities())
 						}
 				results.append(obj)
+				results.append(avg_rating)
 			response = jsonify(results)
 			response.status_code = 200
-			return response
+		return response
 
 	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
 	def comments(id, **kwargs):
@@ -162,7 +164,7 @@ def create_app(config_name):
 
 		else:
 			comments = campsite.comments
-			avg_rating = { 'average_rating': campsite.average_rating(comments) }
+			avg_rating = { 'average_rating': campsite.average_rating() }
 			results = []
 			for comment in comments:
 				obj = {

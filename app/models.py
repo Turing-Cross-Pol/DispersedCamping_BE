@@ -51,12 +51,12 @@ class Campsite(db.Model):
             collect.append(amenity.name)
         return collect
 
-    def average_rating(self, comments):
+    def average_rating(self):
         all_comments = []
         comments = self.comments
         if not comments:
-            total = 0
-        
+            total = 'no comments'
+
         for comment in comments:
             all_comments.append(int(comment.rating))
             total = sum(all_comments) / len(all_comments)
