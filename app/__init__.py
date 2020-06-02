@@ -2,6 +2,7 @@
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, abort
+import pdb
 
 # local import
 from instance.config import app_config
@@ -21,6 +22,8 @@ def create_app(config_name):
 
 	@app.route('/campsites/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 	def campsite_manipulation(id, **kwargs):
+		from app.controllers.campsite_controller import CampsiteController
+		campsite_controller = CampsiteController(request.data)
 		campsite = Campsite.query.filter_by(id=id).first()
 		if not campsite:
 			abort(404)
@@ -32,150 +35,33 @@ def create_app(config_name):
 			}, 200
 
 		elif request.method == 'PUT':
-			name = str(request.data.get('name', campsite.name))
-			image_url = str(request.data.get('image_url', campsite.image_url))
-			city = str(request.data.get('city', campsite.city))
-			state = str(request.data.get('state', campsite.state))
-			description = str(request.data.get('description', campsite.description))
-			driving_tips = str(request.data.get('driving_tips', campsite.driving_tips))
-			lon = float(request.data.get('lon', campsite.lon))
-			lat = float(request.data.get('lat', campsite.lat))
-			amenities = str(request.data.get('amenities', '')).split(', ')
-			campsite.name = name
-			campsite.image_url = image_url
-			campsite.city = city
-			campsite.state = state
-			campsite.description = description
-			campsite.driving_tips = driving_tips
-			campsite.lon = lon
-			campsite.lat = lat
-			campsite.set_amenities(amenities)
-			campsite.save()
-			response = jsonify({
-            'id': campsite.id,
-            'name': campsite.name,
-            'city': campsite.city,
-            'state': campsite.state,
-						'image_url': campsite.image_url,
-            'description': campsite.description,
-            'driving_tips': campsite.driving_tips,
-            'lon': campsite.lon,
-            'lat': campsite.lat
-      })
-			response.status_code = 200
-			return response
+			return campsite_controller.update(campsite)
 		else:
-				# GET
-				response = jsonify({
-						'id': campsite.id,
-            'name': campsite.name,
-						'image_url': campsite.image_url,
-            'city': campsite.city,
-            'state': campsite.state,
-            'description': campsite.description,
-            'driving_tips': campsite.driving_tips,
-            'lon': campsite.lon,
-            'lat': campsite.lat,
-						'timestamp': campsite.date_created,
-						'amenities': campsite.list_amenities()
-      	})
-				response.status_code = 200
-				return response
-
-
+			return campsite_controller.show(campsite)
+				
 	@app.route('/campsites/', methods=['POST', 'GET'])
 	def campsites():
-		from app.models import Amenity
+		from app.controllers.campsite_controller import CampsiteController
+		campsite_controller = CampsiteController(request.data)
 		if request.method == "POST":
-			name = str(request.data.get('name', ''))
-			image_url = str(request.data.get('image_url', ''))
-			city = str(request.data.get('city', ''))
-			state = str(request.data.get('state', ''))
-			description = str(request.data.get('description', ''))
-			driving_tips = str(request.data.get('driving_tips', ''))
-			lon = float(request.data.get('lon', 0))
-			lat = float(request.data.get('lat', 0))
-			amenities = str(request.data.get('amenities', '')).split(', ')
-			campsite = Campsite(name=name, image_url=image_url, city=city, state=state, description=description, driving_tips=driving_tips, lon=lon, lat=lat)
-			campsite.set_amenities(amenities)
-			campsite.save()
-			response = jsonify({
-						'id': campsite.id,
-						'name': campsite.name,
-            'image_url': campsite.image_url,
-            'city': campsite.city,
-            'state': campsite.state,
-            'description': campsite.description,
-            'driving_tips': campsite.driving_tips,
-            'lon': campsite.lon,
-            'lat': campsite.lat,
-						'amenities': campsite.list_amenities()
-						})
-			response.status_code = 201
-			return response
+			return campsite_controller.create()
 		else:
-			# GET
-			campsites = Campsite.get_all()
-			results = []
+			return campsite_controller.index()
 
-			for campsite in campsites:
-				obj = {
-						'id': campsite.id,
-						'name': campsite.name,
-						'city': campsite.city,
-						'state': campsite.state,
-						'image_url': campsite.image_url,
-						'description': campsite.description,
-						'driving_tips': campsite.driving_tips,
-						'lon': campsite.lon,
-						'lat': campsite.lat,
-						'timestamp': campsite.date_created,
-						'amenities': campsite.list_amenities(),
-						'average_rating': campsite.average_rating()
-						}
-				results.append(obj)
-			response = jsonify(results)
-			response.status_code = 200
-		return response
 
 	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
 	def comments(id, **kwargs):
+		from app.controllers.comments_controller import CommentsController
+		comments_controller = CommentsController(request.data)
 		campsite = Campsite.query.filter_by(id=id).first()
 		if not campsite:
 			abort(404)
 
 		if request.method == 'POST':
-			title = str(request.data.get('title', ''))
-			description = str(request.data.get('description', ''))
-			rating = int(request.data.get('rating', 0))
-			comment = Comment(title=title, description=description, rating=rating, campsite_id=campsite.id)
-			campsite.comments.append(comment)
-			campsite.save()
-			comment.save()
-			response = jsonify({
-				'id': comment.id,
-				'title': comment.title,
-				'description': comment.description,
-				'rating': comment.rating
-			})
-			response.status_code = 201
-			return response
+			return comments_controller.create(campsite)
 
 		else:
-			comments = campsite.comments
-			avg_rating = { 'average_rating': campsite.average_rating() }
-			results = []
-			for comment in comments:
-				obj = {
-					'id': comment.id,
-					'title': comment.title,
-					'description': comment.description,
-					'rating': comment.rating
-				}
-				results.append(obj)
-			response = jsonify(results, avg_rating)
-			response.status_code = 200
-			return response
+			return comments_controller.index(campsite)
 
 	@app.route('/campsites/<int:camp_id>/comments/<int:comment_id>', methods=['DELETE'])
 	def destroy_comment(camp_id, comment_id, **kwargs):
