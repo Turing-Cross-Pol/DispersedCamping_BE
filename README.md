@@ -1,16 +1,15 @@
 <!-- PROJECT LOGO -->
-
-
+<p align="center">
   <a>
-    <img src="https://i.ibb.co/j66cs42/tent-location-icon.png" alt="tent-location-icon" align="center">
+   <img align="center" src="https://i.ibb.co/j66cs42/tent-location-icon.png" alt="tent-location-icon">
   </a>
 
- <h3 align="center">WilderNests-BackEnd API</h3>
+<h3 align="center">WilderNests-BackEnd API </h3>
 
-<p align="center">
-WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the back country.
+  <p align="center">
+  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the back country.
+  </p>
 </p>
-
 
 
 <!-- TABLE OF CONTENTS -->
