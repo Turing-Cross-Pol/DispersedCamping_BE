@@ -1,8 +1,9 @@
 <!-- PROJECT LOGO -->
 <br />
+
 <p align="center">
-  <a href="https://github.com/github_username/repo">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://i.ibb.co/">
+    <img src="j66cs42/tent-location-icon.png" alt="Logo" width="120" height="110">
   </a>
 
   <h3 align="center">WilderNests-BackEnd API</h3>
@@ -22,18 +23,16 @@ WilderNests - A mobile app to find or post dispersed campsites in the United Sta
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+WilderNests - A mobile app to find or post dispersed campsites in Colorado. Giving adventurous campers peace of mind by providing community vetting in the back country.
+
+This BackEnd repo acts as an API.
 
 ### Built With
 
@@ -101,10 +100,8 @@ $ python manage.py db upgrade
 python run.py
 ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-There is a seed file for your development database. To seed the database you can run:
+Optional.
+There is a seed file for your development/production database. To seed the database you can run:
 
 ```sh
 $ python manage.py seed 
@@ -121,49 +118,22 @@ To seed a heroku development database run:
 heroku run python manage.py seed
 ```
 
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+<!-- USAGE EXAMPLES -->
+## Usage
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+[Harry Borrelli FE](https://github.com/hborrelli1)<br>
+[Lili Manrique FE](https://github.com/lmanriq)<br>
+[Nathan Keller BE](https://github.com/nkeller1)<br>
+[Will Kunz BE](https://github.com/willkunz13)<br>
+ 
 
-Project Link: [https://github.com/github_username/repo](https://github.com/github_username/repo)
+Front End Project Link: [Wildernests](https://github.com/Turing-Cross-Pol/WilderNests_FE)
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
 
 
 
