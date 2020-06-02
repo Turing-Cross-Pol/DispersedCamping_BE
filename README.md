@@ -61,7 +61,7 @@ PostgreSQL 12.2
 
 1. Clone the repo
 ```sh
-git clone git@github.com:Turing-Cross-Pol/DispersedCamping_BE.git
+$ git clone git@github.com:Turing-Cross-Pol/DispersedCamping_BE.git
 ```
 2. Set up and activate a virtual environment. Each time you enter this directory you will want to active the virtual environment. 
 ```sh
@@ -82,9 +82,9 @@ $ pip install -r requirements.txt
 5. Create a local database:
 ```
 $ psql
-# create database dp-camping-be;
+$ create database dp-camping-be;
 CREATE DATABASE
-# \q
+$ \q
 ```
 6. Migrate the database:
 ```
@@ -94,7 +94,7 @@ $ python manage.py db upgrade
 ```
 7. You can spin up a local server in debug mode with:
 ```she
-python run.py
+$ python run.py
 ```
 
 Optional.
@@ -106,13 +106,13 @@ $ python manage.py seed
 
 Migrate the heroku database with:
 ```sh
-heroku run python manage db migrate
-heroku run python manage db upgrade
+$ heroku run python manage db migrate
+$ heroku run python manage db upgrade
 ```
 
 To seed a heroku development database run:
 ```sh
-heroku run python manage.py seed
+$ heroku run python manage.py seed
 ```
 
 <!-- USAGE EXAMPLES -->
