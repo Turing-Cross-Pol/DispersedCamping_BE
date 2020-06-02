@@ -57,7 +57,7 @@ class CampsiteController:
 			results.append(obj)
 			response = jsonify(results)
 			response.status_code = 200
-			return response
+		return response
 
 	def update(self, campsite):
 		name = str(request.data.get('name', campsite.name))
@@ -110,4 +110,3 @@ class CampsiteController:
 		})
 		response.status_code = 200
 		return response
-
