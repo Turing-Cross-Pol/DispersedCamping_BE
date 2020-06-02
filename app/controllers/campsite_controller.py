@@ -30,7 +30,7 @@ class CampsiteController:
             'driving_tips': campsite.driving_tips,
             'lon': campsite.lon,
             'lat': campsite.lat,
-            'amenities': str(campsite.list_amenities())
+            'amenities': campsite.list_amenities()
             })
 		response.status_code = 201
 		return response
@@ -51,7 +51,7 @@ class CampsiteController:
             'lon': campsite.lon,
             'lat': campsite.lat,
             'timestamp': campsite.date_created,
-            'amenities': str(campsite.list_amenities()),
+            'amenities': campsite.list_amenities(),
             'average_rating': campsite.average_rating()
             }
 			results.append(obj)
