@@ -37,14 +37,14 @@ WilderNests - A mobile app to find or post dispersed campsites in the United Sta
 
 ### Built With
 
-* [](Python 3.7)
-* [](Flask)
-* [](Postgresql)
-* [](SQLAlchemy)
-* [](Marshmallow)
-* [](Heroku)
-* [](Gunicorn)
-* [](Unittest)
+* Python 3.7
+* Flask
+* Postgresql
+* SQLAlchemy
+* Marshmallow
+* Heroku
+* Gunicorn
+* Unittest
 
 
 <!-- GETTING STARTED -->
@@ -57,33 +57,69 @@ To get a local copy up of the backend api and running follow these simple steps.
 
 ```sh
 Python 3.7
+PostgreSQL 12.2
 ```
 
 
 ### Installation
- START HERE
+
 1. Clone the repo
 ```sh
 git clone git@github.com:Turing-Cross-Pol/DispersedCamping_BE.git
 ```
-2. Set up a virtual environment
+2. Set up and activate a virtual environment. Each time you enter this directory you will want to active the virtual environment. 
 ```sh
 $ python3 -m venv env
 $ source env/bin/activate
 ```
-3. Install the required python and flask packages
+3. Export the required files:
+```sh
+$ export FLASK_APP="run.py"
+$ export SECRET="some-very-long-string-of-random-characters-CHANGE-TO-YOUR-LIKING"
+$ export APP_SETTINGS="development"
+$ export DATABASE_URL="postgresql:///dp-camping-be"
+```
+4. Install the required python and flask packages
 ```sh
 $ pip install -r requirements.txt
 ```
-
+5. Create a local database:
+```
+$ psql
+# create database dp-camping-be;
+CREATE DATABASE
+# \q
+```
+6. Migrate the database:
+```
+$ python manage.py db init
+$ python manage.py db migrate
+$ python manage.py db upgrade
+```
+7. You can spin up a local server in debug mode with:
+```she
+python run.py
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+There is a seed file for your development database. To seed the database you can run:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```sh
+$ python manage.py seed 
+```
 
+Migrate the heroku database with:
+```sh
+heroku run python manage db migrate
+heroku run python manage db upgrade
+```
+
+To seed a heroku development database run:
+```sh
+heroku run python manage.py seed
+```
 
 
 <!-- ROADMAP -->
