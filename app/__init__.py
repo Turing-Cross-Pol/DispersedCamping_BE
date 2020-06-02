@@ -22,6 +22,8 @@ def create_app(config_name):
 
 	@app.route('/campsites/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 	def campsite_manipulation(id, **kwargs):
+		from app.controllers.campsite_controller import CampsiteController
+		campsite_controller = CampsiteController(request.data)
 		campsite = Campsite.query.filter_by(id=id).first()
 		if not campsite:
 			abort(404)
@@ -33,60 +35,12 @@ def create_app(config_name):
 			}, 200
 
 		elif request.method == 'PUT':
-			name = str(request.data.get('name', campsite.name))
-			image_url = str(request.data.get('image_url', campsite.image_url))
-			city = str(request.data.get('city', campsite.city))
-			state = str(request.data.get('state', campsite.state))
-			description = str(request.data.get('description', campsite.description))
-			driving_tips = str(request.data.get('driving_tips', campsite.driving_tips))
-			lon = float(request.data.get('lon', campsite.lon))
-			lat = float(request.data.get('lat', campsite.lat))
-			amenities = str(request.data.get('amenities', '')).split(', ')
-			campsite.name = name
-			campsite.image_url = image_url
-			campsite.city = city
-			campsite.state = state
-			campsite.description = description
-			campsite.driving_tips = driving_tips
-			campsite.lon = lon
-			campsite.lat = lat
-			campsite.set_amenities(amenities)
-			campsite.save()
-			response = jsonify({
-            'id': campsite.id,
-            'name': campsite.name,
-            'city': campsite.city,
-            'state': campsite.state,
-						'image_url': campsite.image_url,
-            'description': campsite.description,
-            'driving_tips': campsite.driving_tips,
-            'lon': campsite.lon,
-            'lat': campsite.lat
-      })
-			response.status_code = 200
-			return response
+			return campsite_controller.update(campsite)
 		else:
-				# GET
-				response = jsonify({
-						'id': campsite.id,
-            'name': campsite.name,
-						'image_url': campsite.image_url,
-            'city': campsite.city,
-            'state': campsite.state,
-            'description': campsite.description,
-            'driving_tips': campsite.driving_tips,
-            'lon': campsite.lon,
-            'lat': campsite.lat,
-						'timestamp': campsite.date_created,
-						'amenities': campsite.list_amenities()
-      	})
-				response.status_code = 200
-				return response
-
-
+			return campsite_controller.show(campsite)
+				
 	@app.route('/campsites/', methods=['POST', 'GET'])
 	def campsites():
-		from app.models import Amenity
 		from app.controllers.campsite_controller import CampsiteController
 		campsite_controller = CampsiteController(request.data)
 		if request.method == "POST":
