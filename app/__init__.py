@@ -78,7 +78,7 @@ def create_app(config_name):
             'lon': campsite.lon,
             'lat': campsite.lat,
 						'timestamp': campsite.date_created,
-						'amenities': str(campsite.list_amenities())
+						'amenities': campsite.list_amenities()
       	})
 				response.status_code = 200
 				return response
@@ -93,6 +93,7 @@ def create_app(config_name):
 			return campsite_controller.create()
 		else:
 			return campsite_controller.index()
+
 
 	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
 	def comments(id, **kwargs):
