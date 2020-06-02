@@ -1,12 +1,11 @@
 <!-- PROJECT LOGO -->
-<br />
 
-<p align="center">
-  <a href="https://i.ibb.co/">
-    <img src="j66cs42/tent-location-icon.png" alt="Logo" width="120" height="110">
+
+  <a>
+    <img src="https://i.ibb.co/j66cs42/tent-location-icon.png" alt="tent-location-icon" align="center">
   </a>
 
-  <h3 align="center">WilderNests-BackEnd API</h3>
+ <h3 align="center">WilderNests-BackEnd API</h3>
 
 <p align="center">
 WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the back country.
@@ -30,9 +29,8 @@ WilderNests - A mobile app to find or post dispersed campsites in the United Sta
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-WilderNests - A mobile app to find or post dispersed campsites in Colorado. Giving adventurous campers peace of mind by providing community vetting in the back country.
+This Backend application acts as an API. The [Frontend](https://github.com/Turing-Cross-Pol/WilderNests_FE) lives in a seperate github repo. This application is currently deployed to [Heroku](https://dpcamping-be-stage.herokuapp.com/) and all endpoints are currently accessable. Please see the 'Usage' portion of the README for the primary endpoints.
 
-This BackEnd repo acts as an API.
 
 ### Built With
 
@@ -121,6 +119,17 @@ heroku run python manage.py seed
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+Currently Deployed to Heroku:
+https://dpcamping-be-stage.herokuapp.com/
+
+Primary Endpoints:
+```sh
+GET-POST /campsites/ (get/post to the collection of campsites)
+GET /campsites/:ID/ (get a single campsite by ID)
+GET-POST /campsites/:ID/comments (get all comments for a single campsite)
+```
+
+There are also PUT and DELETE endpoints for each resource. 
 
 
 <!-- CONTACT -->
