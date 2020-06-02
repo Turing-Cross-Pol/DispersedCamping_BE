@@ -51,42 +51,17 @@ def create_app(config_name):
 
 	@app.route('/campsites/<int:id>/comments', methods=['GET', 'POST'])
 	def comments(id, **kwargs):
+		from app.controllers.comments_controller import CommentsController
+		comments_controller = CommentsController(request.data)
 		campsite = Campsite.query.filter_by(id=id).first()
 		if not campsite:
 			abort(404)
 
 		if request.method == 'POST':
-			title = str(request.data.get('title', ''))
-			description = str(request.data.get('description', ''))
-			rating = int(request.data.get('rating', 0))
-			comment = Comment(title=title, description=description, rating=rating, campsite_id=campsite.id)
-			campsite.comments.append(comment)
-			campsite.save()
-			comment.save()
-			response = jsonify({
-				'id': comment.id,
-				'title': comment.title,
-				'description': comment.description,
-				'rating': comment.rating
-			})
-			response.status_code = 201
-			return response
+			return comments_controller.create(campsite)
 
 		else:
-			comments = campsite.comments
-			avg_rating = { 'average_rating': campsite.average_rating() }
-			results = []
-			for comment in comments:
-				obj = {
-					'id': comment.id,
-					'title': comment.title,
-					'description': comment.description,
-					'rating': comment.rating
-				}
-				results.append(obj)
-			response = jsonify(results, avg_rating)
-			response.status_code = 200
-			return response
+			return comments_controller.index(campsite)
 
 	@app.route('/campsites/<int:camp_id>/comments/<int:comment_id>', methods=['DELETE'])
 	def destroy_comment(camp_id, comment_id, **kwargs):
