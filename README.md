@@ -124,7 +124,7 @@ https://dpcamping-be-stage.herokuapp.com/
 Primary Endpoints:
 ```sh
 GET-POST /campsites/ (get/post to the collection of campsites)
-GET /campsites/:ID/ (get a single campsite by ID)
+GET /campsites/:ID (get a single campsite by ID)
 GET-POST /campsites/:ID/comments (get all comments for a single campsite)
 ```
 
