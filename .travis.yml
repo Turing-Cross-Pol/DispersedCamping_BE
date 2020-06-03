@@ -7,5 +7,5 @@ install:
   - pip install -r requirements.txt
 before_script: psql -c "CREATE DATABASE test_db;" -U postgres
 script:
-  - . .env
+  - source .env
   - python -m unittest

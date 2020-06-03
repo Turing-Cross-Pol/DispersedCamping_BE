@@ -35,7 +35,7 @@ def seed():
     campsite1.amenities.append(hike)
     campsite1.amenities.append(bike)
     comment1 = Comment(title = 'Best Biking in Western Colorado', description = 'It gets hot during the day but the campsites are right off the trail so you can go back to camp and cool off.', rating = "5")
-    comment2 = Comment(title = 'Scorpians!', description = 'I did not know scorpians swarmed. At our camp they do...', rating = "3")
+    comment2 = Comment(title = 'Scorpions!', description = 'I did not know scorpions swarmed. At our camp they do...', rating = "3")
     campsite1.comments.append(comment1)
     campsite1.comments.append(comment2)
 
