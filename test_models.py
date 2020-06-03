@@ -55,8 +55,6 @@ class ModelTestCase(unittest.TestCase):
         self.assertEqual(campsite.comments, [comment1, comment2])
         self.assertEqual(campsite.amenities, [fire, hike])
 
-
-
     def test_average_rating(self):
         campsite1 = Campsite(
             name = '18 Rd-North Fruita Desert',
@@ -73,6 +71,20 @@ class ModelTestCase(unittest.TestCase):
         campsite1.comments.append(comment1)
         campsite1.comments.append(comment2)
         self.assertEqual(campsite1.average_rating(), 4)
+
+    def test_average_rating_no_comments(self):
+        campsite1 = Campsite(
+            name = '18 Rd-North Fruita Desert',
+            description = 'Biking galore',
+            city = 'Fruita',
+            image_url = 'https://cdn-files.apstatic.com/mtb/285374_medium_1554167980.jpg',
+            state = 'CO',
+            driving_tips = 'Take Interstate 70 west to Fruita (exit 19). Turn north onto Cherry Street and take the first right onto Aspen Avenue. Go through the roundabout and continue on Aspen to Maple Street. Take a left on Maple Street and then travel north. The street will turn into 17.5 road. Take a right on N.3 Road and then a left on 18 Road. Travel approximately 7 miles on 18 Road to the trailhead. Camping is allowed in designated campsites; A firepan and a portable toilet are required outside of the developed campground. Camping in designated sites costs $10.00/night. If you go just a little North these is free campings with limited amenities',
+            lon = -108.704,
+            lat = 39.334
+            )
+        import pdb; pdb.set_trace()
+        self.assertEqual(campsite1.average_rating(), 'no comments')
 
     def test_list_amenities(self):
         campsite1 = Campsite(
