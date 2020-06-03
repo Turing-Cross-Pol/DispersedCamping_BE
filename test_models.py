@@ -83,7 +83,7 @@ class ModelTestCase(unittest.TestCase):
             lon = -108.704,
             lat = 39.334
             )
-        import pdb; pdb.set_trace()
+
         self.assertEqual(campsite1.average_rating(), 'no comments')
 
     def test_list_amenities(self):
