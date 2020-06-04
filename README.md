@@ -7,7 +7,7 @@
 <h3 align="center">WilderNests-BackEnd API </h3>
 
   <p align="center">
-  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the back country.
+  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the backcountry.
   </p>
 </p>
 
@@ -28,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This Backend application acts as an API. The [Frontend](https://github.com/Turing-Cross-Pol/WilderNests_FE) lives in a seperate github repo. This application is currently deployed to [Heroku](https://dpcamping-be-stage.herokuapp.com/) and all endpoints are currently accessable. Please see the 'Usage' portion of the README for the primary endpoints.
+This Backend application acts as an API. The [Frontend](https://github.com/Turing-Cross-Pol/WilderNests_FE) lives in a separate GitHub repo. This application is currently deployed to [Heroku](https://dpcamping-be-stage.herokuapp.com/) and all endpoints are currently accessible. Please see the 'Usage' portion of the README for the primary endpoints.
 
 
 ### Built With
@@ -46,7 +46,7 @@ This Backend application acts as an API. The [Frontend](https://github.com/Turin
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up of the backend api and running follow these simple steps.
+To clone and download a copy up of the backend API and running follow these simple steps.
 
 ### Prerequisites
 
@@ -63,7 +63,7 @@ PostgreSQL 12.2
 ```sh
 $ git clone git@github.com:Turing-Cross-Pol/DispersedCamping_BE.git
 ```
-2. Set up and activate a virtual environment. Each time you enter this directory you will want to active the virtual environment. 
+2. Set up and activate a virtual environment. Each time you enter this directory you will want to activate the virtual environment. 
 ```sh
 $ python3 -m venv env
 $ source env/bin/activate
@@ -130,14 +130,20 @@ GET-POST /campsites/:ID/comments (get all comments for a single campsite)
 
 There are also PUT and DELETE endpoints for each resource. 
 
+## Future Extensions
+1. User Authentication.
+2. Ability to drop a pin on the map to start the process of posting a campsite.
+3. Save your favorite campsites.
+4. Recommendations-a machine learning algorithm that takes into account location and search history. 
+
 
 <!-- CONTACT -->
 ## Contact
 
-[Harry Borrelli FE](https://github.com/hborrelli1)<br>
-[Lili Manrique FE](https://github.com/lmanriq)<br>
-[Nathan Keller BE](https://github.com/nkeller1)<br>
-[Will Kunz BE](https://github.com/willkunz13)<br>
+[Harry Borrelli-FE](https://github.com/hborrelli1)<br>
+[Lili Manrique-FE](https://github.com/lmanriq)<br>
+[Nathan Keller-BE](https://github.com/nkeller1)<br>
+[Will Kunz-BE](https://github.com/willkunz13)<br>
  
 
 Front End Project Link: [Wildernests](https://github.com/Turing-Cross-Pol/WilderNests_FE)
