@@ -106,8 +106,8 @@ $ python manage.py seed
 
 Migrate the heroku database with:
 ```sh
-$ heroku run python manage db migrate
-$ heroku run python manage db upgrade
+$ heroku run python manage.py db migrate
+$ heroku run python manage.py db upgrade
 ```
 
 To seed a heroku development database run:
