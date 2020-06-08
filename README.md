@@ -168,6 +168,8 @@ Example Response for GET /campsites/
 ```
 ```sh
 POST- /campsites/ 
+```
+```sh
 All attributes of a campsite should be included in the body of the request as form-data. Each should be a key/value pair.
 Attributes of a campsite site currently include:
 name, description, city, state, driving_toips, lat, lon, image_url
@@ -178,6 +180,8 @@ Ex fire, hike
 
 ```sh
 GET /campsites/:ID (get a single campsite by ID)
+```
+```sh
 Example response for GET /campsites/1
 {
     "amenities": [
@@ -199,17 +203,21 @@ Example response for GET /campsites/1
 ```
 ```sh
 DELETE and PUT requests are also supported for a single campsite
+```
+```sh
 DELETE campsites/1
 Returns:
 { "message": "campsite (CAMPSITE ID) deleted successfully". }
-
+```
+```sh
 PUT campsites/1
 All attributes to be updated should mirror a POST request. All attributes to be updated should be sent in key/value pairs as form data in the body of the request.
 ```
-
 Comments:
 ```sh
 GET-/campsites/:ID/comments (Gets all comments for a single campsite)
+```
+```sh
 Example response:
 [
     [
@@ -234,19 +242,24 @@ Example response:
 
 ```sh 
 POST /campsites/:ID/comments
+```
+```sh
 All attributes for a post request should be sent via the body as form data.
 Attributes of a comment are:
 description, rating(int) and title
 ```
-
 ```sh
 DELETE  /campsites/comments/:ID
-Response:
+```
+```sh
+Example Response:
 { "message": "comment {COMMENT ID} deleted successfully" }
 ```
 
 ```sh
 PUT /campsites/comments/:ID
+```
+```sh
 All attributes to be updated should mirror a POST request. All attributes to be updated should be sent in key/value pairs as form data in the body of the request.
 ```
 
