@@ -123,10 +123,10 @@ https://dpcamping-be-stage.herokuapp.com/
 
 Primary Endpoints:
 ```sh
-GET- /campsites/ (GET a collection of all of the avaiable campsites)
+GET- /campsites/ (GET a collection of all of the available campsites)
 ```
 ```sh
-Eample Response for GET /campsites/
+Example Response for GET /campsites/
 [
     {
         "amenities": [
@@ -167,11 +167,11 @@ Eample Response for GET /campsites/
 ```
 ```sh
 POST- /campsites/ 
-All attributes of a campsite should be included in the body of the request as form-data. Each should be a key value pair.
-Atrributes of a campsiute site currently include:
+All attributes of a campsite should be included in the body of the request as form-data. Each should be a key/value pair.
+Attributes of a campsite site currently include:
 name, description, city, state, driving_toips, lat, lon, image_url
 
-The amenities for a campsite are a seperate resource in the database and are sent comma seperated.
+The amenities for a campsite are a separate resource in the database and are sent comma separated.
 Ex fire, hike
 ```
 
@@ -203,7 +203,7 @@ Returns:
 { "message": "campsite (CAMPSITE ID) deleted successfully". }
 
 PUT campsites/1
-All attributes to be updated should mirror a POST request. All attributes to be updatd should be sent in key/value pairs as form data in the body of the request.
+All attributes to be updated should mirror a POST request. All attributes to be updated should be sent in key/value pairs as form data in the body of the request.
 ```
 
 Comments:
@@ -233,7 +233,7 @@ Example response:
 
 ```sh 
 POST /campsites/:ID/comments
-All attributes for a post request should be send via the body as form data.
+All attributes for a post request should be sent via the body as form data.
 Attributes of a comment are:
 description, rating(int) and title
 ```
@@ -246,7 +246,7 @@ Response:
 
 ```sh
 PUT /campsites/comments/:ID
-All attributes to be updated should mirror a POST request. All attributes to be updatd should be sent in key/value pairs as form data in the body of the request.
+All attributes to be updated should mirror a POST request. All attributes to be updated should be sent in key/value pairs as form data in the body of the request.
 ```
 
 ## Future Extensions
