@@ -123,12 +123,131 @@ https://dpcamping-be-stage.herokuapp.com/
 
 Primary Endpoints:
 ```sh
-GET-POST /campsites/ (get/post to the collection of campsites)
-GET /campsites/:ID (get a single campsite by ID)
-GET-POST /campsites/:ID/comments (get all comments for a single campsite)
+GET- /campsites/ (GET a collection of all of the avaiable campsites)
+```
+```sh
+Eample Response for GET /campsites/
+[
+    {
+        "amenities": [
+            "fire",
+            "hike",
+            "bike"
+        ],
+        "average_rating": 4.0,
+        "city": "Fruita",
+        "description": "Biking galore",
+        "driving_tips": "Take Interstate 70 west to Fruita (exit 19). Turn north onto Cherry Street and take the first right onto Aspen Avenue. Go through the roundabout and continue on Aspen to Maple Street. Take a left on Maple Street and then travel north. The street will turn into 17.5 road. Take a right on N.3 Road and then a left on 18 Road. Travel approximately 7 miles on 18 Road to the trailhead. Camping is allowed in designated campsites; A firepan and a portable toilet are required outside of the developed campground. Camping in designated sites costs $10.00/night. If you go just a little North these is free campings with limited amenities",
+        "id": 1,
+        "image_url": "https://cdn-files.apstatic.com/mtb/285374_medium_1554167980.jpg",
+        "lat": 39.334,
+        "lon": -108.704,
+        "name": "18 Rd-North Fruita Desert",
+        "state": "CO",
+        "timestamp": "Thu, 04 Jun 2020 02:11:37 GMT"
+    },
+    {
+        "amenities": [
+            "fire",
+            "hike"
+        ],
+        "average_rating": 5.0,
+        "city": "Fruita",
+        "description": "Hikers will be stunned. Views of the Black Ridge Canyons",
+        "driving_tips": "Accessable via a number of routes",
+        "id": 2,
+        "image_url": "https://www.tripsavvy.com/thmb/7NDLY4l9IqOVrDivKfIb6uz5eu0=/2048x1366/filters:fill(auto,1)/mcinniscanyons-5c51e8ecc9e77c00016f38ed.jpg",
+        "lat": 39.128,
+        "lon": -108.886,
+        "name": "McInnis Canyons Nation Conservation Area",
+        "state": "CO",
+        "timestamp": "Thu, 04 Jun 2020 02:11:37 GMT"
+    },
+ ]
+```
+```sh
+POST- /campsites/ 
+All attributes of a campsite should be included in the body of the request as form-data. Each should be a key value pair.
+Atrributes of a campsiute site currently include:
+name, description, city, state, driving_toips, lat, lon, image_url
+
+The amenities for a campsite are a seperate resource in the database and are sent comma seperated.
+Ex fire, hike
 ```
 
-There are also PUT and DELETE endpoints for each resource. 
+```sh
+GET /campsites/:ID (get a single campsite by ID)
+Example response for GET /campsites/1
+{
+    "amenities": [
+        "fire",
+        "hike",
+        "bike"
+    ],
+    "city": "Fruita",
+    "description": "Biking galore",
+    "driving_tips": "Take Interstate 70 west to Fruita (exit 19). Turn north onto Cherry Street and take the first right onto Aspen Avenue. Go through the roundabout and continue on Aspen to Maple Street. Take a left on Maple Street and then travel north. The street will turn into 17.5 road. Take a right on N.3 Road and then a left on 18 Road. Travel approximately 7 miles on 18 Road to the trailhead. Camping is allowed in designated campsites; A firepan and a portable toilet are required outside of the developed campground. Camping in designated sites costs $10.00/night. If you go just a little North these is free campings with limited amenities",
+    "id": 1,
+    "image_url": "https://cdn-files.apstatic.com/mtb/285374_medium_1554167980.jpg",
+    "lat": 39.334,
+    "lon": -108.704,
+    "name": "18 Rd-North Fruita Desert",
+    "state": "CO",
+    "timestamp": "Thu, 04 Jun 2020 02:11:37 GMT"
+}
+```
+```sh
+DELETE and PUT requests are also supported for a single campsite
+DELETE campsites/1
+Returns:
+{ "message": "campsite (CAMPSITE ID) deleted successfully". }
+
+PUT campsites/1
+All attributes to be updated should mirror a POST request. All attributes to be updatd should be sent in key/value pairs as form data in the body of the request.
+```
+
+Comments:
+```sh
+GET-/campsites/:ID/comments (Gets all comments for a single campsite)
+Example response:
+[
+    [
+        {
+            "description": "It gets hot during the day but the campsites are right off the trail so you can go back to camp and cool off.",
+            "id": 1,
+            "rating": "5",
+            "title": "Best Biking in Western Colorado"
+        },
+        {
+            "description": "I did not know scorpions swarmed. At our camp they do...",
+            "id": 2,
+            "rating": "3",
+            "title": "Scorpions!"
+        }
+    ],
+    {
+        "average_rating": 4.0
+    }
+]
+```
+
+```sh 
+POST /campsites/:ID/comments
+All attributes for a post request should be send via the body as form data.
+Attributes of a comment are:
+description, rating(int) and title
+```
+
+```sh
+DELETE  /campsites/comments/:ID
+Response:
+{ "message": "comment {COMMENT ID} deleted successfully" }
+```
+
+```sh
+PUT /campsites/comments/:ID
+All attributes to be updated should mirror a POST request. All attributes to be updatd should be sent in key/value pairs as form data in the body of the request.
+```
 
 ## Future Extensions
 1. User Authentication.
