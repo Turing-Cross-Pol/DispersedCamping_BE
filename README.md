@@ -7,7 +7,7 @@
 <h3 align="center">WilderNests-BackEnd API </h3>
 
   <p align="center">
-  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the backcountry.
+  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the backcountry. See a short youtube video of the Wildernest's application [here](https://www.youtube.com/watch?v=GVoGGwNy4Rk)
   </p>
 </p>
 
