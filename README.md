@@ -7,7 +7,7 @@
 <h3 align="center">WilderNests-BackEnd API </h3>
 
   <p align="center">
-  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the backcountry. See a short youtube video of the Wildernest's application [here](https://www.youtube.com/watch?v=GVoGGwNy4Rk)
+  WilderNests - A mobile app to find or post dispersed campsites in the United States. Giving adventurous campers peace of mind by providing community vetting in the backcountry. 
   </p>
 </p>
 
@@ -27,6 +27,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+See a short youtube video of the Wildernest's application [here](https://www.youtube.com/watch?v=GVoGGwNy4Rk)
 
 This Backend application acts as an API. The [Frontend](https://github.com/Turing-Cross-Pol/WilderNests_FE) lives in a separate GitHub repo. This application is currently deployed to [Heroku](https://dpcamping-be-stage.herokuapp.com/) and all endpoints are currently accessible. Please see the 'Usage' portion of the README for the primary endpoints.
 
