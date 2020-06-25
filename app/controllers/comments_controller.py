@@ -32,7 +32,8 @@ class CommentsController:
 				'id': comment.id,
 				'title': comment.title,
 				'description': comment.description,
-				'rating': comment.rating
+				'rating': comment.rating,
+				'date_created': comment.date_created
 			}
 			results.append(obj)
 		response = jsonify(results, avg_rating)
