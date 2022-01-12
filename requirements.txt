@@ -32,7 +32,7 @@ packaging==20.4
 parso==0.7.0
 pexpect==4.8.0
 pickleshare==0.7.5
-pipenv==2018.11.26
+pipenv==2022.1.8
 pluggy==0.13.1
 prompt-toolkit==3.0.5
 psycopg2==2.8.4
